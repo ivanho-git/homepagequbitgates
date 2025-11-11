@@ -2,58 +2,63 @@ import streamlit as st
 
 # Page configuration
 st.set_page_config(
-    page_title="Quantum Gate Simulator",
+    page_title="Quantum Gate Simulator — Home",
     page_icon="⚛️",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# Dark Mode Compatible CSS
+# Styling (Dark mode friendly)
 st.markdown("""
     <style>
-    /* Import Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-    
-    /* Global Styles */
-    * {
-        font-family: 'Poppins', sans-serif;
-    }
-    
-    /* Main Header */
+    * { font-family: 'Poppins', sans-serif; }
+
+    /* Hide Streamlit branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+
     .main-header {
-        font-size: 3.5rem;
-        font-weight: 700;
+        font-size: 3.2rem;
+        font-weight: 800;
         text-align: center;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 0.5rem;
-        animation: fadeIn 1s ease-in;
+        margin: 0.25rem 0 0.5rem 0;
+        animation: fadeIn 0.9s ease-in;
     }
-    
     .subtitle {
         text-align: center;
-        color: var(--text-color);
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
+        color: rgba(255,255,255,0.85);
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
         font-weight: 300;
     }
-    
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-20px); }
+        from { opacity: 0; transform: translateY(-8px); }
         to { opacity: 1; transform: translateY(0); }
     }
-    
-    /* Section headers */
+
+    .gradient-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 22px;
+        color: white !important;
+        padding: 2.2rem;
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.35);
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .gradient-hero h1, .gradient-hero p { color: white !important; }
+
     .section-header {
-        font-size: 2rem;
-        font-weight: 700;
+        font-size: 1.9rem;
+        font-weight: 800;
         color: #667eea;
-        margin: 2rem 0 1rem 0;
+        margin: 1.8rem 0 1rem 0;
         text-align: center;
         position: relative;
     }
-    
     .section-header::after {
         content: '';
         display: block;
@@ -63,228 +68,229 @@ st.markdown("""
         margin: 0.5rem auto;
         border-radius: 2px;
     }
-    
-    /* Info Boxes - Dark Mode Compatible */
+
+    .feature-card {
+        background: rgba(102, 126, 234, 0.08);
+        border: 1px solid rgba(102, 126, 234, 0.2);
+        border-radius: 16px;
+        padding: 1.2rem;
+        height: 100%;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        transition: all 0.25s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 14px 32px rgba(102, 126, 234, 0.25);
+    }
+    .feature-card h3 {
+        color: #667eea !important;
+        margin-bottom: 0.35rem;
+    }
+    .feature-card p {
+        font-size: 0.98rem;
+        opacity: 0.95;
+        margin-top: 0.35rem;
+    }
+    .mini-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        font-weight: 700;
+        font-size: 0.8rem;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        margin-bottom: 0.6rem;
+    }
+
     .info-box {
         background: rgba(102, 126, 234, 0.1);
-        padding: 1.8rem;
+        padding: 1.2rem;
         border-radius: 15px;
-        margin: 1rem 0;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        margin: 0.6rem 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
         border-left: 5px solid #667eea;
-        transition: all 0.3s ease;
-        height: 100%;
     }
-    
-    .info-box:hover {
-        transform: translateX(5px);
-        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
-    }
-    
-    .info-box h3 {
-        font-weight: 700;
-        font-size: 1.4rem;
-        margin-bottom: 0.8rem;
-        color: #667eea !important;
-    }
-    
     .info-box h4 {
-        font-weight: 600;
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
-        color: #764ba2 !important;
+        color: #667eea !important;
+        margin-bottom: 0.4rem;
     }
-    
-    /* Custom link button */
+
     .custom-link-button {
         display: inline-block;
         width: 100%;
-        padding: 1.2rem 2rem;
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: white;
+        padding: 1.1rem 2rem;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: white !important;
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         border: none;
-        border-radius: 15px;
+        border-radius: 14px;
         cursor: pointer;
         text-align: center;
         text-decoration: none;
-        box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 2px;
+        box-shadow: 0 10px 26px rgba(245, 87, 108, 0.35);
+        transition: all 0.25s ease;
+        letter-spacing: 1px;
     }
-    
     .custom-link-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 35px rgba(245, 87, 108, 0.6);
+        transform: translateY(-2px);
+        box-shadow: 0 14px 36px rgba(245, 87, 108, 0.55);
         background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
     }
-    
-    /* Feature boxes */
-    .feature-box {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        padding: 2rem;
-        border-radius: 15px;
-        color: white;
-        margin: 1.5rem 0;
-        box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+
+    .footer {
         text-align: center;
-    }
-    
-    .feature-box h2, .feature-box p {
-        color: white !important;
-    }
-    
-    /* Profile Cards */
-    .profile-card {
-        background: rgba(102, 126, 234, 0.05);
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(102, 126, 234, 0.2);
-        height: 100%;
-    }
-    
-    .profile-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.25);
-    }
-    
-    .profile-img {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid #667eea;
-        margin-bottom: 1rem;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .profile-name {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #667eea;
-        margin-bottom: 0.25rem;
-    }
-    
-    .profile-role {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #764ba2;
-        margin-bottom: 0.8rem;
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .main-header {
-            font-size: 2.5rem;
-        }
-        .info-box, .profile-card {
-            margin-bottom: 1.5rem;
-        }
+        padding: 1.2rem 0 0.4rem 0;
+        border-top: 2px solid rgba(102, 126, 234, 0.25);
+        margin-top: 2.2rem;
+        opacity: 0.9;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# === ANIMATED HEADER ===
-st.markdown('<h1 class="main-header">⚛️ Quantum Gate Simulator</h1>', unsafe_allow_html=True)
-st.markdown('<p class="subtitle">Explore the fascinating world of quantum computing through interactive visualizations</p>', unsafe_allow_html=True)
+# Header
+st.markdown('<h1 class="main-header">⚛ Quantum Gate Simulator</h1>', unsafe_allow_html=True)
+st.markdown('<p class="subtitle">A beautiful, interactive way to learn qubits, gates, rotations, optical physics, and BB84 quantum cryptography.</p>', unsafe_allow_html=True)
 
-# === APP OVERVIEW ===
-st.markdown('<p class="section-header">What You Can Explore</p>', unsafe_allow_html=True)
-
-col1, col2, col3, col4 = st.columns(4)
-
-with col1:
-    st.markdown("""
-    <div class="info-box">
-        <h4>⚡ Standard Gates</h4>
-        <p>Experiment with fundamental quantum gates (X, Y, Z, H, S, T) and see how they manipulate qubit states in real-time.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col2:
-    st.markdown("""
-    <div class="info-box">
-        <h4>🌀 Rotation Gates</h4>
-        <p>Visualize the effect of rotating qubits around X, Y, and Z axes with adjustable angles. Watch the Bloch sphere update dynamically.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col3:
-    st.markdown("""
-    <div class="info-box">
-        <h4>🔮 Faraday Rotator</h4>
-        <p>Simulate the Faraday effect - observe how magnetic fields rotate the polarization of light and its quantum representation.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col4:
-    st.markdown("""
-    <div class="info-box">
-        <h4>🔐 BB84 Protocol</h4>
-        <p>Learn quantum key distribution by simulating the BB84 protocol and see how it enables absolutely secure communication.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# === MEET THE TEAM ===
-st.markdown('<p class="section-header">Meet The Team</p>', unsafe_allow_html=True)
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.markdown("""
-    <div class="profile-card">
-        <img src="https://github.com/ivanho-git/qubit-gates/blob/main/abhinav.jpeg?raw=true" class="profile-img">
-        <p class="profile-name">ABHINAV SUNEESH</p>
-        <p class="profile-role">BB84 in DFS Researcher</p>
-        <p>Explores how BB84 operates within a Decoherence-Free Subspace.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col2:
-    st.markdown("""
-    <div class="profile-card">
-        <img src="https://github.com/ivanho-git/qubit-gates/blob/main/ibhann.jpeg?raw=true" class="profile-img">
-        <p class="profile-name">IBHAN MUKHERJEE</p>
-        <p class="profile-role">Security Analyst</p>
-        <p>Tests quantum protocols for vulnerabilities and demonstrates detection of eavesdropping attempts.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col3:
-    st.markdown("""
-    <div class="profile-card">
-        <img src="https://github.com/ivanho-git/qubit-gates/blob/main/IMG-20251106-WA0032.jpg?raw=true" class="profile-img">
-        <p class="profile-name">HARI ASHWIN</p>
-        <p class="profile-role">Quantum Circuit Designer</p>
-        <p>Designs and implements quantum circuits for gate and protocol simulations.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# === CALL TO ACTION ===
+# Hero
 st.markdown("""
-<div class="feature-box" style="margin-top: 3rem;">
-    <h2>🚀 Ready to Enter the Quantum Realm?</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95;">
-        Click below to start your quantum computing journey!
+<div class="gradient-hero">
+    <h1 style="margin-top: 0;">Welcome to the Quantum Realm</h1>
+    <p style="font-size: 1.1rem; opacity: 0.95; max-width: 860px; margin: 0 auto;">
+        Explore core quantum concepts with real-time visuals:
+        apply standard gates, rotate qubits on the Bloch sphere, simulate the Faraday effect,
+        and dive into BB84 quantum key distribution — all in one app.
     </p>
-    <a href="https://qubit-gates-ibhanmukh.streamlit.app/" target="_blank" style="text-decoration: none;">
-        <button class="custom-link-button">ENTER THE QUANTUM REALM</button>
-    </a>
 </div>
 """, unsafe_allow_html=True)
 
-# === FOOTER ===
-st.markdown("<br><br>", unsafe_allow_html=True)
+# CTA Button (centered)
+c1, c2, c3 = st.columns([1, 2, 1])
+with c2:
+    # Use st.link_button when available; fallback to styled anchor
+    if getattr(st, "link_button", None):
+        st.link_button("🚀 Enter the Quantum Realm", "https://qubit-gates-ibhanmukh.streamlit.app/")
+    else:
+        st.markdown("""
+            <a href="https://qubit-gates-ibhanmukh.streamlit.app/" target="_blank" class="custom-link-button">
+                🚀 Enter the Quantum Realm
+            </a>
+        """, unsafe_allow_html=True)
+
+st.markdown('<p style="text-align:center; opacity:0.85; margin-top: 0.35rem;">Opens the full app in a new tab</p>', unsafe_allow_html=True)
+
+# What's inside
+st.markdown('<p class="section-header">What You Can Explore</p>', unsafe_allow_html=True)
+a, b, c = st.columns(3)
+with a:
+    st.markdown("""
+    <div class="feature-card">
+        <span class="mini-badge">🎯 Module</span>
+        <h3>Standard Quantum Gates</h3>
+        <p>Apply X, Y, Z, H, S, T (and inverses) to |0⟩, |1⟩, |+⟩, |−⟩. 
+        See amplitudes, probabilities, and a Bloch-sphere view — plus circuit diagrams.</p>
+    </div>
+    """, unsafe_allow_html=True)
+with b:
+    st.markdown("""
+    <div class="feature-card">
+        <span class="mini-badge">🌀 Module</span>
+        <h3>Rotation Gates</h3>
+        <p>Rotate around X, Y, or Z by a custom angle (degrees or radians).
+        Watch smooth animation of state evolution and track |α|² and |β|².</p>
+    </div>
+    """, unsafe_allow_html=True)
+with c:
+    st.markdown("""
+    <div class="feature-card">
+        <span class="mini-badge">🔮 Module</span>
+        <h3>Faraday Rotator</h3>
+        <p>Simulate polarization rotation with Verdet constant, magnetic field, and path length.
+        Dual-view plots and an optional animation bring the physics to life.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+d, e = st.columns(2)
+with d:
+    st.markdown("""
+    <div class="feature-card">
+        <span class="mini-badge">🔐 Module</span>
+        <h3>BB84 Protocol</h3>
+        <p>Understand the steps of quantum key distribution: transmission, basis reconciliation,
+        error checking, and privacy amplification — with an external live simulator.</p>
+    </div>
+    """, unsafe_allow_html=True)
+with e:
+    st.markdown("""
+    <div class="feature-card">
+        <span class="mini-badge">🧑‍🔬 Info</span>
+        <h3>About & Team</h3>
+        <p>Meet the minds behind the project and learn about the motivation, design choices,
+        and where to explore next.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# How it feels to use
+st.markdown('<p class="section-header">Why You’ll Love This App</p>', unsafe_allow_html=True)
+col_l, col_r = st.columns(2)
+with col_l:
+    st.markdown("""
+    <div class="info-box">
+        <h4>✨ Intuitive Visuals</h4>
+        <p>Bespoke UI, gradients, and clean metrics make quantum states less abstract and more relatable.</p>
+    </div>
+    <div class="info-box">
+        <h4>⚛️ Concept-to-Circuit</h4>
+        <p>See the mapping from math to circuits to Bloch-sphere states all in one place.</p>
+    </div>
+    """, unsafe_allow_html=True)
+with col_r:
+    st.markdown("""
+    <div class="info-box">
+        <h4>🧪 Guided Exploration</h4>
+        <p>From basic gates to rotations to optical effects — build intuition step by step.</p>
+    </div>
+    <div class="info-box">
+        <h4>🔐 Real-World Relevance</h4>
+        <p>Connect core quantum mechanics with modern cryptography via BB84.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Quick start steps
+st.markdown('<p class="section-header">Quick Start</p>', unsafe_allow_html=True)
 st.markdown("""
-    <div style='text-align: center; padding: 2rem 0; border-top: 2px solid rgba(102, 126, 234, 0.3); margin-top: 3rem;'>
-        <p style='font-size: 1.1rem; margin-bottom: 0.5rem;'>Made By Engineers 👷🏻‍♂️ For Curiosity Not Just For Credits 😉</p>
-        <p style='font-size: 0.9rem; opacity: 0.8;'>Visualizing quantum states on the Bloch sphere</p>
+- Pick a module that interests you (e.g., Standard Gates or Rotation Gates).
+- Choose an initial state and apply a gate or rotation.
+- Read the metrics, study the Bloch sphere, and inspect the circuit diagram.
+- Jump to the Faraday Rotator to relate qubit phases to polarization rotation.
+- Explore the BB84 section to see how quantum rules enable secure communication.
+""")
+
+# Second CTA Button (centered)
+c1, c2, c3 = st.columns([1, 2, 1])
+with c2:
+    if getattr(st, "link_button", None):
+        st.link_button("🧭 Take me to the App", "https://qubit-gates-ibhanmukh.streamlit.app/")
+    else:
+        st.markdown("""
+            <a href="https://qubit-gates-ibhanmukh.streamlit.app/" target="_blank" class="custom-link-button">
+                🧭 Take me to the App
+            </a>
+        """, unsafe_allow_html=True)
+
+# FAQ
+with st.expander("FAQ — What do I need to run this?"):
+    st.write("- A modern browser. No installs required for the deployed app.")
+    st.write("- For local dev, you'll need Python, Streamlit, Qiskit, NumPy, and Matplotlib.")
+with st.expander("FAQ — Is this suitable for teaching?"):
+    st.write("Yes! The visuals, animations, and metrics are designed for classrooms, workshops, and self-learning.")
+with st.expander("FAQ — Can I contribute or extend it?"):
+    st.write("Absolutely. Add new gates, more rotations (e.g., composite sequences), or new optical components.")
+
+# Footer
+st.markdown("""
+    <div class="footer">
+        <p style='font-size: 1.05rem; margin-bottom: 0.4rem;'>Made By Engineers 👷🏻‍♂️ For Curiosity Not Just For Credits 😉</p>
+        <p style='font-size: 0.9rem; opacity: 0.85;'>Quantum visuals | Bloch sphere | QKD (BB84) | Built with Streamlit</p>
     </div>
 """, unsafe_allow_html=True)
